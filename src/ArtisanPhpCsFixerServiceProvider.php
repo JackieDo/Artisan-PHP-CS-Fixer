@@ -1,0 +1,75 @@
+<?php namespace Jackiedo\ArtisanPhpCsFixer;
+
+use Illuminate\Support\ServiceProvider;
+use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerFix;
+
+/**
+ * The ArtisanPhpCsFixerServiceProvider class
+ *
+ * @package Jackiedo\ArtisanPhpCsFixer
+ * @author  Jackie Do <anhvudo@gmail.com>
+ */
+class ArtisanPhpCsFixerServiceProvider extends ServiceProvider
+{
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Bootstrap handles
+        $this->configHandle();
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('command.phpcsfixer.fix', function ($app) {
+            return new ArtisanPhpCsFixerFix;
+        });
+
+        $this->commands('command.phpcsfixer.fix');
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            'command.phpcsfixer.fix',
+        ];
+    }
+
+    /**
+     * Loading and publishing package's config
+     *
+     * @return void
+     */
+    protected function configHandle()
+    {
+        $packageConfigPath = __DIR__.'/Config/config.php';
+        $appConfigPath     = config_path('phpcsfixer.php');
+
+        $this->mergeConfigFrom($packageConfigPath, 'phpcsfixer');
+
+        $this->publishes([
+            $packageConfigPath => $appConfigPath,
+        ], 'config');
+    }
+}
