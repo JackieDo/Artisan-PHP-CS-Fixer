@@ -35,14 +35,14 @@ Artisan PHP CS Fixer don't support Laravel 4.x. Currently, this package have fol
 | [1.x](https://github.com/JackieDo/Artisan-PHP-CS-Fixer/tree/1.x) | 5.0 - 5.2        |
 | [2.x](https://github.com/JackieDo/Artisan-PHP-CS-Fixer/tree/2.x) | 5.3 and later    |
 
-> **Note:** This documentation is use for Laravel 5.3 and later.
+> **Note:** This documentation is use for Laravel 5.0 - 5.2.
 
 ## Installation
 You can install this package through [Composer](https://getcomposer.org).
 
 - First, edit your project's `composer.json` file to require `jackiedo/artisan-php-cs-fixer`. Add following line to the `require` section:
 ```
-"jackiedo/artisan-php-cs-fixer": "2.*"
+"jackiedo/artisan-php-cs-fixer": "1.*"
 ```
 
 - Next step, we run Composer update commend from the Terminal on your project source directory:
@@ -50,7 +50,7 @@ You can install this package through [Composer](https://getcomposer.org).
 $ composer update
 ```
 
-> **Note:** Instead of performing the above two steps, you can perform faster with the command line `$ composer require jackiedo/artisan-php-cs-fixer:2.*` from Terminal
+> **Note:** Instead of performing the above two steps, you can perform faster with the command line `$ composer require jackiedo/artisan-php-cs-fixer:1.*` from Terminal
 
 - Once install/update operation completes, the final step is add the service provider. Open `config/app.php`, and add a new item to the `providers` section:
 ```
