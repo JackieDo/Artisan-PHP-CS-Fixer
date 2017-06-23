@@ -8,8 +8,9 @@ $finder = Finder::create()
     ->exclude('resources')
     ->exclude('storage')
     ->exclude('vendor')
-    ->in(__DIR__)
+    ->in(getcwd())
     ->name('*.php')
+    ->name('*.phpt')
     ->notName('*.blade.php')
     ->notName('_ide_helper.php')
     ->ignoreDotFiles(true)
@@ -27,15 +28,14 @@ $rules = [
     'no_empty_comment' => false,
     'no_extra_consecutive_blank_lines' => [
         'tokens' => [
+            'curly_brace_block',
             'parenthesis_brace_block',
             'extra',
             'throw',
             'use',
         ]
     ],
-    'no_blank_lines_after_class_opening' => false,
     'new_with_braces' => false,
-    'blank_line_after_opening_tag' => false,
 ];
 
 return Config::create()

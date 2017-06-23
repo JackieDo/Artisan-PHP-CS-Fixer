@@ -63,15 +63,9 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider
      */
     protected function configHandle()
     {
-        $sourceConfig = __DIR__.'/.php_cs';
+        $sourceConfig = __DIR__.'/Config/.php_cs';
         $exportConfig = base_path('.php_cs');
 
-        // Generate the default php-cs-fixer config file
-        if (!file_exists($exportConfig)) {
-            copy($sourceConfig, $exportConfig);
-        }
-
-        // Force override the config file if needed (--force)
         $this->publishes([
             $sourceConfig => $exportConfig,
         ], 'config');

@@ -25,7 +25,7 @@ class ArtisanPhpCsFixerFix extends Command
      *
      * @var string
      */
-    protected $description = 'Fix php coding standards for a directory or a file';
+    protected $description = 'Fix php coding standards for directories or files';
 
     /**
      * Create a new command instance.
@@ -55,8 +55,10 @@ class ArtisanPhpCsFixerFix extends Command
 
         if (!is_null($this->option('config'))) {
             $commandParams[] = '--config="'.base_path($this->option('config')).'"';
-        } else {
+        } elseif (file_exists(base_path('.php_cs'))) {
             $commandParams[] = '--config="'.base_path('.php_cs').'"';
+        } else {
+            $commandParams[] = '--config="'.__DIR__.'/../../Config/.php_cs"';
         }
 
         if ($this->option('dry-run')) {
