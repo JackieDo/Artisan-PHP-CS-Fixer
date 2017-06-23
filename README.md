@@ -101,7 +101,7 @@ Whenever you run the artisan `php-cs-fixer:fix` command, one file with named `.p
 [MIT](LICENSE) © Jackie Do
 
 ## PHP CS Fixer official documentation
-For more documentation about PHP CS Fixer, you can visit [here](#https://github.com/FriendsOfPHP/PHP-CS-Fixer).
+For more documentation about PHP CS Fixer, you can visit [here](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
 ## Thanks for use
 Hopefully, this package is useful to you.
