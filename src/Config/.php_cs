@@ -5,7 +5,6 @@ use PhpCsFixer\Config;
 
 $finder = Finder::create()
     ->exclude('bootstrap')
-    ->exclude('resources')
     ->exclude('storage')
     ->exclude('vendor')
     ->in(getcwd())
