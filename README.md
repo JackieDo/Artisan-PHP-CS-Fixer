@@ -21,6 +21,10 @@ Look at one of the following topics to learn more about Artisan PHP CS Fixer
 * [Versions and compatibility](#versions-and-compatibility)
 * [Installation](#installation)
 * [Usage](#usage)
+    - [Get version](#get-version)
+    - [Fix code](#fix-code)
+    - [Describe rule or set](#describe-rule-or-set)
+    - [Show README content](#show-readme-content)
 * [Configuration](#configuration)
 * [Exclusion of the cache file](#exclusion-of-the-cache-file)
 * [License](#license)
@@ -60,8 +64,19 @@ $ composer update
 > **Note:** From Laravel 5.1, you should write as `Jackiedo\ArtisanPhpCsFixer\ArtisanPhpCsFixerServiceProvider::class,`
 
 ## Usage
-At the root directory of your Laravel project, run the artisan `php-cs-fixer:fix` command, which accepts a variety of parameters, as follow syntax:
 
+#### Get version
+Display PHP-CS-Fixer version installed.
+
+Syntax:
+```
+$ php artisan php-cs-fixer:version
+```
+
+#### Fix code
+Fix your code with PHP Coding Standards.
+
+Syntax:
 ```
 $ php artisan php-cs-fixer:fix [options] [path/to/dir/or/file]
 ```
@@ -79,6 +94,22 @@ $ php artisan php-cs-fixer:fix app
 
 // Only fixes all files in the `app` directory with specific configuration file
 $ php artisan php-cs-fixer:fix --config="path/to/config/file" app
+```
+
+#### Describe rule or set
+Display description of rule or set.
+
+Syntax:
+```
+$ php artisan php-cs-fixer:describe name/of/rule/or/set
+```
+
+#### Show README content
+Display README content of PHP-CS-Fixer.
+
+Syntax:
+```
+$ php artisan php-cs-fixer:readme
 ```
 
 ## Configuration
