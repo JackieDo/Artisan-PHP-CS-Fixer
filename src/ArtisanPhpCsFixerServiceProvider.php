@@ -4,7 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerFix;
 
 /**
- * The ArtisanPhpCsFixerServiceProvider class
+ * The ArtisanPhpCsFixerServiceProvider class.
  *
  * @package Jackiedo\ArtisanPhpCsFixer
  * @author  Jackie Do <anhvudo@gmail.com>
@@ -57,19 +57,23 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Loading and publishing package's config
+     * Publish php-cs-fixer's config file to the root directory of project.
      *
      * @return void
      */
     protected function configHandle()
     {
-        $packageConfigPath = __DIR__.'/Config/config.php';
-        $appConfigPath     = config_path('phpcsfixer.php');
+        $sourceConfig = __DIR__.'/.php_cs';
+        $exportConfig = base_path('.php_cs');
 
-        $this->mergeConfigFrom($packageConfigPath, 'phpcsfixer');
+        // Generate the default php-cs-fixer config file
+        if (!file_exists($exportConfig)) {
+            copy($sourceConfig, $exportConfig);
+        }
 
+        // Force override the config file if needed (--force)
         $this->publishes([
-            $packageConfigPath => $appConfigPath,
+            $sourceConfig => $exportConfig,
         ], 'config');
     }
 }
