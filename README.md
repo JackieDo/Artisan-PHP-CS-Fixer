@@ -4,11 +4,11 @@
 [![Latest Unstable Version](https://poser.pugx.org/jackiedo/artisan-php-cs-fixer/v/unstable)](https://packagist.org/packages/jackiedo/artisan-php-cs-fixer)
 [![License](https://poser.pugx.org/jackiedo/artisan-php-cs-fixer/license)](https://packagist.org/packages/jackiedo/artisan-php-cs-fixer)
 
-The PHP Coding Standards Fixer tool fixes most issues in your code when you want to follow the PHP coding standards as defined in the PSR-1 and PSR-2 documents and many more.
+> The PHP Coding Standards Fixer tool fixes most issues in your code when you want to follow the PHP coding standards as defined in the PSR-1 and PSR-2 documents and many more.
 
-If you are already using a linter to identify coding standards problems in your code, you know that fixing them by hand is tedious, especially on large projects. This tool does not only detect them, but also fixes them for you.
+> If you are already using a linter to identify coding standards problems in your code, you know that fixing them by hand is tedious, especially on large projects. This tool does not only detect them, but also fixes them for you.
 
-This package is a [PHP-CS-Fixer](#https://github.com/FriendsOfPHP/PHP-CS-Fixer) bridge for use via Artisan CLI on Laravel. From now on, you can easily use PHP-CS-Fixer differently for each Laravel project with your team instead of installing a global fixer.
+These are introductions from authors who created PHP-CS-Fixer and this package is a [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) bridge for use via Artisan CLI on Laravel. From now on, you can easily use PHP-CS-Fixer differently for each Laravel project with your team instead of installing a global fixer.
 
 # Features of this package
 * Use PHP-CS-Fixer differently for each Laravel project.
