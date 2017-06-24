@@ -44,7 +44,10 @@ class ArtisanPhpCsFixerFix extends Command
      */
     public function fire()
     {
+        chdir(base_path());
+
         $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
+
         $commandParams = [];
 
         $commandParams[] = '--path-mode="'.$this->option('path-mode').'"';
@@ -91,6 +94,26 @@ class ArtisanPhpCsFixerFix extends Command
 
         if (!is_null($this->option('show-progress'))) {
             $commandParams[] = '--show-progress="'.$this->option('show-progress').'"';
+        }
+
+        if ($this->option('quiet')) {
+            $commandParams[] = '--quiet';
+        }
+
+        if ($this->option('verbose')) {
+            $commandParams[] = '--verbose';
+        }
+
+        if ($this->option('ansi')) {
+            $commandParams[] = '--ansi';
+        }
+
+        if ($this->option('no-ansi')) {
+            $commandParams[] = '--no-ansi';
+        }
+
+        if ($this->option('no-interaction')) {
+            $commandParams[] = '--no-interaction';
         }
 
         if (!empty($this->argument('path'))) {
