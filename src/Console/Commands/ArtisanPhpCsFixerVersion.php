@@ -50,6 +50,16 @@ class ArtisanPhpCsFixerVersion extends Command
     }
 
     /**
+     * Alias of the fire() method
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $this->fire();
+    }
+
+    /**
      * Get the console command arguments.
      *
      * @return array
