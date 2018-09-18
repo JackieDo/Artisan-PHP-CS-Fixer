@@ -35,6 +35,9 @@ $rules = [
         ]
     ],
     'new_with_braces' => false,
+    'array_syntax' => [
+        'syntax' => 'short'
+    ]
 ];
 
 return Config::create()
