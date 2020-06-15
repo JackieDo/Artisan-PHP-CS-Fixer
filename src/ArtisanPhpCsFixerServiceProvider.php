@@ -1,5 +1,6 @@
 <?php namespace Jackiedo\ArtisanPhpCsFixer;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerFix;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerVersion;
@@ -12,16 +13,8 @@ use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerReadme;
  * @package Jackiedo\ArtisanPhpCsFixer
  * @author  Jackie Do <anhvudo@gmail.com>
  */
-class ArtisanPhpCsFixerServiceProvider extends ServiceProvider
+class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Bootstrap the application events.
      *
