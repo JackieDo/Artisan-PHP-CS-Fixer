@@ -57,12 +57,14 @@ class ArtisanPhpCsFixerFix extends Command
         }
 
         if (!is_null($this->option('config'))) {
-            $commandParams[] = '--config="'.base_path($this->option('config')).'"';
+            $configFile = base_path($this->option('config'));
         } elseif (file_exists(base_path('.php_cs'))) {
-            $commandParams[] = '--config="'.base_path('.php_cs').'"';
+            $configFile = base_path('.php_cs');
         } else {
-            $commandParams[] = '--config="'.__DIR__.'/../../Config/.php_cs"';
+            $configFile = __DIR__.'/../../Config/.php_cs';
         }
+
+        $commandParams[] = '--config="'.realpath($configFile).'"';
 
         if ($this->option('dry-run')) {
             $commandParams[] = '--dry-run';
