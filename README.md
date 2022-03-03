@@ -18,18 +18,21 @@ These are introductions from authors who created PHP-CS-Fixer and this package i
 # Overview
 Look at one of the following topics to learn more about Artisan PHP CS Fixer
 
-* [Versions and compatibility](#versions-and-compatibility)
-* [Installation](#installation)
-* [Usage](#usage)
-    - [Get version](#get-version)
-    - [Fix code](#fix-code)
-    - [Describe rule or set](#describe-rule-or-set)
-    - [Show README content](#show-readme-content)
-* [Configuration](#configuration)
-* [Exclusion of the cache file](#exclusion-of-the-cache-file)
-* [License](#license)
-* [PHP CS Fixer official documentation](#php-cs-fixer-official-documentation)
-* [Thanks from author](#thanks-for-use)
+- [Artisan PHP CS Fixer](#artisan-php-cs-fixer)
+- [Features of this package](#features-of-this-package)
+- [Overview](#overview)
+  - [Versions and compatibility](#versions-and-compatibility)
+  - [Installation](#installation)
+  - [Usage](#usage)
+      - [Get version](#get-version)
+      - [Fix code](#fix-code)
+      - [Describe rule or set](#describe-rule-or-set)
+      - [Show README content](#show-readme-content)
+  - [Configuration](#configuration)
+  - [Exclusion of the cache file](#exclusion-of-the-cache-file)
+  - [License](#license)
+  - [PHP CS Fixer official documentation](#php-cs-fixer-official-documentation)
+  - [Thanks for use](#thanks-for-use)
 
 ## Versions and compatibility
 Artisan PHP CS Fixer don't support Laravel 4.x. Currently, this package have following branchs compatible with Laravel 5.x:
@@ -119,13 +122,13 @@ To change the configuration of the fixer with your own purpose, you need publish
 $ php artisan vendor:publish --provider="Jackiedo\ArtisanPhpCsFixer\ArtisanPhpCsFixerServiceProvider"
 ```
 
-This will create one file named `.php_cs` in the root directory of your project. This file is returned an instance of `PhpCsFixer\ConfigInterface` which lets you configure the rules, the files and directories that need to be analyzed. From now and then, you can share this file with all of your developing team members. The rest is you have to think of a way to always sync this file for your team.
+This will create one file named `.php-cs-fixer.php` in the root directory of your project. This file is returned an instance of `PhpCsFixer\ConfigInterface` which lets you configure the rules, the files and directories that need to be analyzed. From now and then, you can share this file with all of your developing team members. The rest is you have to think of a way to always sync this file for your team.
 
 ## Exclusion of the cache file
-Whenever you run the artisan `php-cs-fixer:fix` command, one file with named `.php_cs.cache` will be created at the root directory of your project. You can exclude this file by append following line into `.gitignore` file:
+Whenever you run the artisan `php-cs-fixer:fix` command, one file with named `.php-cs-fixer.cache` will be created at the root directory of your project. You can exclude this file by append following line into `.gitignore` file:
 
 ```
-.php_cs.cache
+.php-cs-fixer.cache
 ```
 
 ## License

@@ -1,18 +1,20 @@
-<?php namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
+<?php
+
+namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * The ArtisanPhpCsFixerFix class.
  *
- * @package Jackiedo\ArtisanPhpCsFixer
+ * @package jackiedo/artisan-php-cs-fixer
+ *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
 class ArtisanPhpCsFixerFix extends Command
 {
-
     /**
      * The console command name.
      *
@@ -29,8 +31,6 @@ class ArtisanPhpCsFixerFix extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -47,39 +47,38 @@ class ArtisanPhpCsFixerFix extends Command
         chdir(base_path());
 
         $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
+        $configFile            = __DIR__ . '/../../Config/.php-cs-fixer.php';
 
-        $commandParams = [];
+        if (file_exists($rootConfig = base_path('.php-cs-fixer.php'))) {
+            $configFile = $rootConfig;
+        }
 
-        $commandParams[] = '--path-mode="'.$this->option('path-mode').'"';
+        if (!is_null($optionConfig = $this->option('config'))) {
+            $configFile = $optionConfig;
+        }
+
+        $commandParams   = [];
+        $commandParams[] = '--config="' . realpath($configFile) . '"';
+        $commandParams[] = '--path-mode="' . $this->option('path-mode') . '"';
 
         if (!is_null($this->option('allow-risky'))) {
-            $commandParams[] = '--allow-risky="'.$this->option('allow-risky').'"';
+            $commandParams[] = '--allow-risky="' . $this->option('allow-risky') . '"';
         }
-
-        if (!is_null($this->option('config'))) {
-            $configFile = base_path($this->option('config'));
-        } elseif (file_exists(base_path('.php_cs'))) {
-            $configFile = base_path('.php_cs');
-        } else {
-            $configFile = __DIR__.'/../../Config/.php_cs';
-        }
-
-        $commandParams[] = '--config="'.realpath($configFile).'"';
 
         if ($this->option('dry-run')) {
             $commandParams[] = '--dry-run';
         }
 
         if (!is_null($this->option('rules'))) {
-            $commandParams[] = '--rules="'.$this->option('rules').'"';
+            $commandParams[] = '--rules="' . $this->option('rules') . '"';
         }
 
         if (!is_null($this->option('using-cache'))) {
-            $commandParams[] = '--using-cache="'.$this->option('using-cache').'"';
+            $commandParams[] = '--using-cache="' . $this->option('using-cache') . '"';
         }
 
         if (!is_null($this->option('cache-file'))) {
-            $commandParams[] = '--cache-file="'.$this->option('cache-file').'"';
+            $commandParams[] = '--cache-file="' . $this->option('cache-file') . '"';
         }
 
         if ($this->option('diff')) {
@@ -87,7 +86,7 @@ class ArtisanPhpCsFixerFix extends Command
         }
 
         if (!is_null($this->option('format'))) {
-            $commandParams[] = '--format="'.$this->option('format').'"';
+            $commandParams[] = '--format="' . $this->option('format') . '"';
         }
 
         if ($this->option('stop-on-violation')) {
@@ -95,7 +94,7 @@ class ArtisanPhpCsFixerFix extends Command
         }
 
         if (!is_null($this->option('show-progress'))) {
-            $commandParams[] = '--show-progress="'.$this->option('show-progress').'"';
+            $commandParams[] = '--show-progress="' . $this->option('show-progress') . '"';
         }
 
         if ($this->option('quiet')) {
@@ -120,19 +119,21 @@ class ArtisanPhpCsFixerFix extends Command
 
         if (!empty($this->argument('path'))) {
             $paths = [];
+
             foreach ($this->argument('path') as $path) {
-                $paths[] = '"'.base_path($path).'"';
+                $paths[] = '"' . base_path($path) . '"';
             }
+
             $commandParams[] = implode(' ', $paths);
         }
 
-        $paramString = (empty($commandParams)) ? '' : ' '.implode(' ', $commandParams);
+        $paramString = (empty($commandParams)) ? '' : ' ' . implode(' ', $commandParams);
 
-        passthru($phpCsFixerBinnaryPath.' fix'.$paramString);
+        passthru($phpCsFixerBinnaryPath . ' fix' . $paramString);
     }
 
     /**
-     * Alias of the fire() method
+     * Alias of the fire() method.
      *
      * @return mixed
      */
@@ -149,7 +150,7 @@ class ArtisanPhpCsFixerFix extends Command
     protected function getArguments()
     {
         return [
-            array('path', InputArgument::IS_ARRAY, 'The path to directory or file.', null),
+            ['path', InputArgument::IS_ARRAY, 'The path to directory or file.', null],
         ];
     }
 
@@ -161,17 +162,17 @@ class ArtisanPhpCsFixerFix extends Command
     protected function getOptions()
     {
         return [
-            array('path-mode', null, InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', 'override'),
-            array('allow-risky', null, InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'),
-            array('config', null, InputOption::VALUE_REQUIRED, 'The path to a .php_cs file.'),
-            array('dry-run', null, InputOption::VALUE_NONE, 'Only shows which files would have been modified, leaving your files unchanged.'),
-            array('rules', null, InputOption::VALUE_REQUIRED, 'The rules to apply for fixer (the rule names must be separated by a comma).'),
-            array('using-cache', null, InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'),
-            array('cache-file', null, InputOption::VALUE_REQUIRED, 'The path to the cache file.'),
-            array('diff', null, InputOption::VALUE_NONE, 'Also produce diff for each file.'),
-            array('format', null, InputOption::VALUE_REQUIRED, 'To output results in other formats.'),
-            array('stop-on-violation', null, InputOption::VALUE_NONE, 'Stop execution on first violation.'),
-            array('show-progress', null, InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, or estimating).'),
+            ['path-mode', null, InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', 'override'],
+            ['allow-risky', null, InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'],
+            ['config', null, InputOption::VALUE_REQUIRED, 'The path to a .php-cs-fixer.php file.'],
+            ['dry-run', null, InputOption::VALUE_NONE, 'Only shows which files would have been modified, leaving your files unchanged.'],
+            ['rules', null, InputOption::VALUE_REQUIRED, 'The rules to apply for fixer (the rule names must be separated by a comma).'],
+            ['using-cache', null, InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'],
+            ['cache-file', null, InputOption::VALUE_REQUIRED, 'The path to the cache file.'],
+            ['diff', null, InputOption::VALUE_NONE, 'Also produce diff for each file.'],
+            ['format', null, InputOption::VALUE_REQUIRED, 'To output results in other formats.'],
+            ['stop-on-violation', null, InputOption::VALUE_NONE, 'Stop execution on first violation.'],
+            ['show-progress', null, InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, or estimating).'],
         ];
     }
 }

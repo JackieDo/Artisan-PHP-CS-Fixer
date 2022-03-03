@@ -1,18 +1,18 @@
-<?php namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
+<?php
+
+namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * The ArtisanPhpCsFixerVersion class.
  *
- * @package Jackiedo\ArtisanPhpCsFixer
+ * @package jackiedo/artisan-php-cs-fixer
+ *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
 class ArtisanPhpCsFixerVersion extends Command
 {
-
     /**
      * The console command name.
      *
@@ -29,8 +29,6 @@ class ArtisanPhpCsFixerVersion extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -46,11 +44,11 @@ class ArtisanPhpCsFixerVersion extends Command
     {
         $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
 
-        passthru($phpCsFixerBinnaryPath.' --version');
+        passthru($phpCsFixerBinnaryPath . ' --version');
     }
 
     /**
-     * Alias of the fire() method
+     * Alias of the fire() method.
      *
      * @return mixed
      */
