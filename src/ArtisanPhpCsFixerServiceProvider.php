@@ -81,7 +81,7 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
 
         $this->publishes([
             $sourceConfig => $exportConfig,
-        ], 'config');
+        ], 'fixer-config');
     }
 
     /**
