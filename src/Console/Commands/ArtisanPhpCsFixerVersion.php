@@ -32,7 +32,7 @@ class ArtisanPhpCsFixerVersion extends BaseCommand
      */
     public function fire()
     {
-        passthru($this->phpCsFixerBinnary . ' --version');
+        passthru($this->phpCsFixerBinary . ' --version');
     }
 
     /**

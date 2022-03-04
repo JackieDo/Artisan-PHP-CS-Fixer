@@ -117,7 +117,7 @@ class ArtisanPhpCsFixerFix extends BaseCommand
 
         $paramString = (empty($commandParams)) ? '' : ' ' . implode(' ', $commandParams);
 
-        passthru($this->phpCsFixerBinnary . ' fix' . $paramString);
+        passthru($this->phpCsFixerBinary . ' fix' . $paramString);
     }
 
     /**

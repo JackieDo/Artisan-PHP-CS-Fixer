@@ -14,11 +14,11 @@ use Illuminate\Console\Command;
 abstract class BaseCommand extends Command
 {
     /**
-     * Path to PHP-CS-Fixer binnary file
+     * Path to PHP-CS-Fixer binary file
      *
      * @var string
      */
-    protected $phpCsFixerBinnary;
+    protected $phpCsFixerBinary;
 
     /**
      * Create a new command instance.
@@ -27,7 +27,7 @@ abstract class BaseCommand extends Command
     {
         parent::__construct();
 
-        $this->phpCsFixerBinnary = base_path('vendor/bin/php-cs-fixer');
+        $this->phpCsFixerBinary = base_path('vendor/bin/php-cs-fixer');
     }
 
     /**

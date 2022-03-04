@@ -34,7 +34,7 @@ class ArtisanPhpCsFixerDescribe extends BaseCommand
      */
     public function fire()
     {
-        passthru($this->phpCsFixerBinnary . ' describe ' . $this->argument('name'));
+        passthru($this->phpCsFixerBinary . ' describe ' . $this->argument('name'));
     }
 
     /**
