@@ -22,6 +22,7 @@ Look at one of the following topics to learn more about Artisan PHP CS Fixer
 - [Features of this package](#features-of-this-package)
 - [Overview](#overview)
   - [Versions and compatibility](#versions-and-compatibility)
+  - [Note for the version 3.x](#note-for-the-version-3x)
   - [Installation](#installation)
   - [Usage](#usage)
       - [Get version](#get-version)
@@ -43,6 +44,9 @@ Artisan PHP CS Fixer don't support Laravel 4.x. Currently, this package have fol
 | [3.x](https://github.com/JackieDo/Artisan-PHP-CS-Fixer/tree/master) | 8.x and later    |
 
 > **Note:** This documentation is used for branch 3.x
+
+## Note for the version 3.x
+If you have used this package before, please see [here](UPGRADING.md#from-v2x-to-v3x) for the change in v3.x
 
 ## Installation
 You can install this package through [Composer](https://getcomposer.org). At the root of your Laravel application directory, run the following command (in any terminal client):
