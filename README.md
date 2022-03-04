@@ -18,18 +18,22 @@ These are introductions from authors who created PHP-CS-Fixer and this package i
 # Overview
 Look at one of the following topics to learn more about Artisan PHP CS Fixer
 
-* [Versions and compatibility](#versions-and-compatibility)
-* [Installation](#installation)
-* [Usage](#usage)
-    - [Get version](#get-version)
-    - [Fix code](#fix-code)
-    - [Describe rule or set](#describe-rule-or-set)
-    - [Show README content](#show-readme-content)
-* [Configuration](#configuration)
-* [Exclusion of the cache file](#exclusion-of-the-cache-file)
-* [License](#license)
-* [PHP CS Fixer official documentation](#php-cs-fixer-official-documentation)
-* [Thanks from author](#thanks-for-use)
+- [Artisan PHP CS Fixer](#artisan-php-cs-fixer)
+- [Features of this package](#features-of-this-package)
+- [Overview](#overview)
+  - [Versions and compatibility](#versions-and-compatibility)
+  - [Installation](#installation)
+      - [Step 1 - Require package](#step-1---require-package)
+      - [Step 2 - Register service provider](#step-2---register-service-provider)
+  - [Usage](#usage)
+      - [Get version](#get-version)
+      - [Fix code](#fix-code)
+      - [Describe rule or rule set](#describe-rule-or-rule-set)
+  - [Configuration](#configuration)
+  - [Exclusion of the cache file](#exclusion-of-the-cache-file)
+  - [License](#license)
+  - [PHP CS Fixer official documentation](#php-cs-fixer-official-documentation)
+  - [Thanks for use](#thanks-for-use)
 
 ## Versions and compatibility
 Artisan PHP CS Fixer don't support Laravel 4.x. Currently, this package have following branchs compatible with Laravel 5.x:
@@ -39,29 +43,25 @@ Artisan PHP CS Fixer don't support Laravel 4.x. Currently, this package have fol
 | [1.x](https://github.com/JackieDo/Artisan-PHP-CS-Fixer/tree/1.x) | 5.0 - 5.2        |
 | [2.x](https://github.com/JackieDo/Artisan-PHP-CS-Fixer/tree/2.x) | 5.3 and later    |
 
-> **Note:** This documentation is use for Laravel 5.3 and later.
+> **Note:** This documentation is used for branch 2.x
 
 ## Installation
 You can install this package through [Composer](https://getcomposer.org).
 
-- First, edit your project's `composer.json` file to require `jackiedo/artisan-php-cs-fixer`. Add following line to the `require` section:
-```
-"jackiedo/artisan-php-cs-fixer": "2.*"
-```
-
-- Next step, we run Composer update commend from the Terminal on your project source directory:
+#### Step 1 - Require package
+At the root of your Laravel application directory, run the following command (in any terminal client):
 ```shell
-$ composer update
+$ composer require jackiedo/artisan-php-cs-fixer
 ```
 
-> **Note:** Instead of performing the above two steps, you can perform faster with the command line `$ composer require jackiedo/artisan-php-cs-fixer:2.*` from Terminal
+**Note:** Since Laravel 5.5, [service providers and aliases are automatically registered](https://laravel.com/docs/5.5/packages#package-discovery), so you can safely skip the following step:
 
-- Once install/update operation completes, the final step is add the service provider. Open `config/app.php`, and add a new item to the `providers` section:
-```
-'Jackiedo\ArtisanPhpCsFixer\ArtisanPhpCsFixerServiceProvider',
-```
+#### Step 2 - Register service provider
+Open `config/app.php`, and add a new line to the providers section:
 
-> **Note:** From Laravel 5.1, you should write as `Jackiedo\ArtisanPhpCsFixer\ArtisanPhpCsFixerServiceProvider::class,`
+```php
+Jackiedo\ArtisanPhpCsFixer\ArtisanPhpCsFixerServiceProvider::class,
+```
 
 ## Usage
 
@@ -69,7 +69,7 @@ $ composer update
 Display PHP-CS-Fixer version installed.
 
 Syntax:
-```
+```shell
 $ php artisan php-cs-fixer:version
 ```
 
@@ -77,7 +77,7 @@ $ php artisan php-cs-fixer:version
 Fix your code with PHP Coding Standards.
 
 Syntax:
-```
+```shell
 $ php artisan php-cs-fixer:fix [options] [path/to/dir/or/file]
 ```
 
@@ -93,23 +93,25 @@ $ php artisan php-cs-fixer:fix
 $ php artisan php-cs-fixer:fix app
 
 // Only fixes all files in the `app` directory with specific configuration file
-$ php artisan php-cs-fixer:fix --config="path/to/config/file" app
+$ php artisan php-cs-fixer:fix --config="path/to/fixer-config/file" app
 ```
 
-#### Describe rule or set
-Display description of rule or set.
-
-Syntax:
-```
-$ php artisan php-cs-fixer:describe name/of/rule/or/set
-```
-
-#### Show README content
-Display README content of PHP-CS-Fixer.
+#### Describe rule or rule set
+Display description of rule or rule set.
 
 Syntax:
+```shell
+$ php artisan php-cs-fixer:describe name/of/rule/or/rule-set
 ```
-$ php artisan php-cs-fixer:readme
+
+Exampple 1:
+```shell
+$ php artisan php-cs-fixer:describe @Symfony
+```
+
+Exampple 2:
+```shell
+$ php artisan php-cs-fixer:describe array_syntax
 ```
 
 ## Configuration

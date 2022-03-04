@@ -1,18 +1,18 @@
-<?php namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
+<?php
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
+namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
+
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * The ArtisanPhpCsFixerDescribe class.
  *
  * @package Jackiedo\ArtisanPhpCsFixer
+ *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
-class ArtisanPhpCsFixerDescribe extends Command
+class ArtisanPhpCsFixerDescribe extends BaseCommand
 {
-
     /**
      * The console command name.
      *
@@ -25,17 +25,7 @@ class ArtisanPhpCsFixerDescribe extends Command
      *
      * @var string
      */
-    protected $description = 'Describe rule / ruleset of fixer.';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Describe rule / rule set of fixer.';
 
     /**
      * Execute the console command.
@@ -44,19 +34,7 @@ class ArtisanPhpCsFixerDescribe extends Command
      */
     public function fire()
     {
-        $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
-
-        passthru($phpCsFixerBinnaryPath.' describe '.$this->argument('name'));
-    }
-
-    /**
-     * Alias of the fire() method
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $this->fire();
+        passthru($this->phpCsFixerBinary . ' describe ' . $this->argument('name'));
     }
 
     /**
@@ -67,7 +45,7 @@ class ArtisanPhpCsFixerDescribe extends Command
     protected function getArguments()
     {
         return [
-            array('name', InputArgument::REQUIRED, 'Name of rule / set.'),
+            ['name', InputArgument::REQUIRED, 'Name of rule / rule set.'],
         ];
     }
 

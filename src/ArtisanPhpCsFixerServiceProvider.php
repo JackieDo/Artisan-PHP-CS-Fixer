@@ -1,16 +1,18 @@
-<?php namespace Jackiedo\ArtisanPhpCsFixer;
+<?php
+
+namespace Jackiedo\ArtisanPhpCsFixer;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerDescribe;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerFix;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerVersion;
-use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerDescribe;
-use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerReadme;
 
 /**
  * The ArtisanPhpCsFixerServiceProvider class.
  *
  * @package Jackiedo\ArtisanPhpCsFixer
+ *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
 class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -23,7 +25,8 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
     public function boot()
     {
         // Bootstrap handles
-        $this->configHandle();
+        $this->bootConfig();
+        $this->bootCommands();
     }
 
     /**
@@ -44,15 +47,6 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
         $this->app->singleton('command.phpcsfixer.describe', function ($app) {
             return new ArtisanPhpCsFixerDescribe;
         });
-
-        $this->app->singleton('command.phpcsfixer.readme', function ($app) {
-            return new ArtisanPhpCsFixerReadme;
-        });
-
-        $this->commands('command.phpcsfixer.fix');
-        $this->commands('command.phpcsfixer.version');
-        $this->commands('command.phpcsfixer.describe');
-        $this->commands('command.phpcsfixer.readme');
     }
 
     /**
@@ -66,7 +60,6 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
             'command.phpcsfixer.fix',
             'command.phpcsfixer.version',
             'command.phpcsfixer.describe',
-            'command.phpcsfixer.readme',
         ];
     }
 
@@ -75,13 +68,27 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
      *
      * @return void
      */
-    protected function configHandle()
+    protected function bootConfig()
     {
-        $sourceConfig = __DIR__.'/Config/.php_cs';
+        $sourceConfig = __DIR__ . '/Config/.php_cs';
         $exportConfig = base_path('.php_cs');
 
         $this->publishes([
             $sourceConfig => $exportConfig,
         ], 'config');
+    }
+
+    /**
+     * Handle package's commands.
+     *
+     * @return void
+     */
+    protected function bootCommands()
+    {
+        $this->commands([
+            'command.phpcsfixer.version',
+            'command.phpcsfixer.fix',
+            'command.phpcsfixer.describe',
+        ]);
     }
 }
