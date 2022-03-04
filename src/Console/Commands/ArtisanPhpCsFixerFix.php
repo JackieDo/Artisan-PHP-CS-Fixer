@@ -44,8 +44,6 @@ class ArtisanPhpCsFixerFix extends Command
      */
     public function fire()
     {
-        chdir(base_path());
-
         $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
         $configFile            = __DIR__ . '/../../Config/.php-cs-fixer.php';
 
@@ -121,7 +119,7 @@ class ArtisanPhpCsFixerFix extends Command
             $paths = [];
 
             foreach ($this->argument('path') as $path) {
-                $paths[] = '"' . base_path($path) . '"';
+                $paths[] = '"' . $path . '"';
             }
 
             $commandParams[] = implode(' ', $paths);
