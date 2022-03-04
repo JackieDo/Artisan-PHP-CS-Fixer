@@ -2,7 +2,6 @@
 
 namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
  *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
-class ArtisanPhpCsFixerDescribe extends Command
+class ArtisanPhpCsFixerDescribe extends BaseCommand
 {
     /**
      * The console command name.
@@ -26,15 +25,7 @@ class ArtisanPhpCsFixerDescribe extends Command
      *
      * @var string
      */
-    protected $description = 'Describe rule / ruleset of fixer.';
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Describe rule / rule-set of fixer.';
 
     /**
      * Execute the console command.
@@ -43,19 +34,7 @@ class ArtisanPhpCsFixerDescribe extends Command
      */
     public function fire()
     {
-        $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
-
-        passthru($phpCsFixerBinnaryPath . ' describe ' . $this->argument('name'));
-    }
-
-    /**
-     * Alias of the fire() method.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $this->fire();
+        passthru($this->phpCsFixerBinnary . ' describe ' . $this->argument('name'));
     }
 
     /**
@@ -66,7 +45,7 @@ class ArtisanPhpCsFixerDescribe extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'Name of rule / set.'],
+            ['name', InputArgument::REQUIRED, 'Name of rule / rule-set.'],
         ];
     }
 

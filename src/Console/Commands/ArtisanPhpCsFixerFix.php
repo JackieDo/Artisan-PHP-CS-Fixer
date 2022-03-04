@@ -2,7 +2,6 @@
 
 namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
-use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -13,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @author  Jackie Do <anhvudo@gmail.com>
  */
-class ArtisanPhpCsFixerFix extends Command
+class ArtisanPhpCsFixerFix extends BaseCommand
 {
     /**
      * The console command name.
@@ -30,22 +29,13 @@ class ArtisanPhpCsFixerFix extends Command
     protected $description = 'Fix php coding standards for directories or files';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function fire()
     {
-        $phpCsFixerBinnaryPath = base_path('vendor/bin/php-cs-fixer');
-        $configFile            = __DIR__ . '/../../Config/.php-cs-fixer.php';
+        $configFile = __DIR__ . '/../../Config/.php-cs-fixer.php';
 
         if (file_exists($rootConfig = base_path('.php-cs-fixer.php'))) {
             $configFile = $rootConfig;
@@ -127,17 +117,7 @@ class ArtisanPhpCsFixerFix extends Command
 
         $paramString = (empty($commandParams)) ? '' : ' ' . implode(' ', $commandParams);
 
-        passthru($phpCsFixerBinnaryPath . ' fix' . $paramString);
-    }
-
-    /**
-     * Alias of the fire() method.
-     *
-     * @return mixed
-     */
-    public function handle()
-    {
-        $this->fire();
+        passthru($this->phpCsFixerBinnary . ' fix' . $paramString);
     }
 
     /**
