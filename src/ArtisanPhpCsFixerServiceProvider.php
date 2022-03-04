@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerDescribe;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerFix;
+use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerReadme;
 use Jackiedo\ArtisanPhpCsFixer\Console\Commands\ArtisanPhpCsFixerVersion;
 
 /**
@@ -36,16 +37,20 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
      */
     public function register()
     {
-        $this->app->singleton('command.phpcsfixer.version', function ($app) {
-            return new ArtisanPhpCsFixerVersion;
-        });
-
         $this->app->singleton('command.phpcsfixer.fix', function ($app) {
             return new ArtisanPhpCsFixerFix;
         });
 
+        $this->app->singleton('command.phpcsfixer.version', function ($app) {
+            return new ArtisanPhpCsFixerVersion;
+        });
+
         $this->app->singleton('command.phpcsfixer.describe', function ($app) {
             return new ArtisanPhpCsFixerDescribe;
+        });
+
+        $this->app->singleton('command.phpcsfixer.readme', function ($app) {
+            return new ArtisanPhpCsFixerReadme;
         });
     }
 
@@ -57,9 +62,10 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
     public function provides()
     {
         return [
-            'command.phpcsfixer.version',
             'command.phpcsfixer.fix',
+            'command.phpcsfixer.version',
             'command.phpcsfixer.describe',
+            'command.phpcsfixer.readme',
         ];
     }
 
@@ -86,9 +92,10 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
     protected function bootCommands()
     {
         $this->commands([
-            'command.phpcsfixer.version',
             'command.phpcsfixer.fix',
+            'command.phpcsfixer.version',
             'command.phpcsfixer.describe',
+            'command.phpcsfixer.readme',
         ]);
     }
 }
