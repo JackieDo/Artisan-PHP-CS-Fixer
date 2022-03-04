@@ -26,7 +26,7 @@ class ArtisanPhpCsFixerFix extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Fix php coding standards for directories or files';
+    protected $description = 'Fix PHP Coding Standards for directories or files';
 
     /**
      * Execute the console command.

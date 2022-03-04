@@ -25,7 +25,7 @@ class ArtisanPhpCsFixerDescribe extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Describe rule / rule-set of fixer.';
+    protected $description = 'Describe rule / rule set of fixer.';
 
     /**
      * Execute the console command.
@@ -45,7 +45,7 @@ class ArtisanPhpCsFixerDescribe extends BaseCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'Name of rule / rule-set.'],
+            ['name', InputArgument::REQUIRED, 'Name of rule / rule set.'],
         ];
     }
 
