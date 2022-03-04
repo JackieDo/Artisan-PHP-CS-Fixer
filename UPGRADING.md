@@ -60,4 +60,8 @@ return $config
 | ----------------------------- | -------------------------------- |
 | `@Symfony` + _some overrides_ | `@PhpCsFixer` + _some overrides_ |
 
+**Note:**
+- It should be noted that the `@PhpCsFixer` rule set includes the `@Symfony` rule set.
+- The `@Symfony` rule set now uses the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard as the default.
+
 If you want to learn more about the changes of the **PHP-CS-Fixer 3.x**, please see [here](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/UPGRADE-v3.md)
