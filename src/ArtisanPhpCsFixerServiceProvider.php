@@ -71,7 +71,7 @@ class ArtisanPhpCsFixerServiceProvider extends ServiceProvider implements Deferr
     protected function bootConfig()
     {
         $sourceConfig = __DIR__ . '/Config/.php-cs-fixer.php';
-        $exportConfig = base_path('.php-cs-fixer.php');
+        $exportConfig = base_path('.php-cs-fixer.dist.php');
 
         $this->publishes([
             $sourceConfig => $exportConfig,

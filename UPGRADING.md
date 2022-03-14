@@ -9,10 +9,10 @@ The 3.x version of this package was created to support Laravel 8.x and later, no
 
 ## Changing the name of some files
 
-| 2.x             | 3.x                   | Description                        |
-| --------------- | --------------------- | ---------------------------------- |
-| `.php_cs`       | `.php-cs-fixer.php`   | Published Fixer configuration file |
-| `.php_cs.cache` | `.php-cs-fixer.cache` | Cache file                         |
+| 2.x             | 3.x                      | Description                        |
+| --------------- | ------------------------ | ---------------------------------- |
+| `.php_cs`       | `.php-cs-fixer.dist.php` | Published Fixer configuration file |
+| `.php_cs.cache` | `.php-cs-fixer.cache`    | Cache file                         |
 
 ## Fixer Config initialization method in the published Fixer configuration file
 
