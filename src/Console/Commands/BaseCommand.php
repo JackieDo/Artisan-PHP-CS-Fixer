@@ -3,6 +3,7 @@
 namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
 use Illuminate\Console\Command;
+use Jackiedo\PathHelper\Path;
 
 /**
  * The BaseCommand class.
@@ -14,7 +15,7 @@ use Illuminate\Console\Command;
 abstract class BaseCommand extends Command
 {
     /**
-     * Path to PHP-CS-Fixer binary file
+     * Path to PHP-CS-Fixer binary file.
      *
      * @var string
      */
@@ -27,7 +28,7 @@ abstract class BaseCommand extends Command
     {
         parent::__construct();
 
-        $this->phpCsFixerBinary = base_path('vendor/bin/php-cs-fixer');
+        $this->phpCsFixerBinary = Path::osStyle(base_path('vendor/bin/php-cs-fixer'));
     }
 
     /**
