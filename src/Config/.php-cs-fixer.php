@@ -4,12 +4,13 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
-    ->exclude('bootstrap')
-    ->exclude('storage')
-    ->exclude('vendor')
     ->in(getcwd())
+    ->exclude([
+        'bootstrap',
+        'storage',
+        'vendor',
+    ])
     ->name('*.php')
-    ->name('*.phpt')
     ->notName('*.blade.php')
     ->notName('_ide_helper.php')
     ->ignoreDotFiles(true)
@@ -50,8 +51,15 @@ $rules = [
     ],
     'new_with_braces' => false,
     'no_empty_comment' => false,
+    'no_superfluous_phpdoc_tags' => false,
     'multiline_whitespace_before_semicolons' => [
         'strategy' => 'no_multi_line',
+    ],
+    'php_unit_method_casing' => [
+        'case' => 'snake_case',
+    ],
+    'phpdoc_add_missing_param_annotation' => [
+        'only_untyped' => false,
     ],
     'phpdoc_no_empty_return' => false,
     'phpdoc_no_package' => false,
