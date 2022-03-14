@@ -12,7 +12,8 @@
     "require": {
         "php": ">=7.1.3",
         "illuminate/support": "^5.8|^6.0|^7.0",
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "jackiedo/path-helper": "^1.0"
     },
     "require-dev": {
         "illuminate/console": "^5.8|^6.0|^7.0"

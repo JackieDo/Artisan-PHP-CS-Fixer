@@ -2,6 +2,7 @@
 
 namespace Jackiedo\ArtisanPhpCsFixer\Console\Commands;
 
+use Jackiedo\PathHelper\Path;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -29,56 +30,77 @@ class ArtisanPhpCsFixerFix extends BaseCommand
     protected $description = 'Fix PHP Coding Standards for directories or files';
 
     /**
+     * Config file name.
+     *
+     * @var string
+     */
+    protected $configFileName = '.php_cs';
+
+    /**
+     * Alternative config file name.
+     *
+     * @var string
+     */
+    protected $distConfigFileName = '.php_cs.dist';
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function fire()
     {
-        $configFile = __DIR__ . '/../../Config/.php_cs';
+        $configFile      = realpath(__DIR__ . '/../../Config/.php_cs');
+        $useOptionConfig = false;
 
-        if (file_exists($rootConfig = base_path('.php_cs'))) {
-            $configFile = $rootConfig;
+        if (is_file($rootConfig = base_path($this->distConfigFileName))) {
+            $configFile = realpath($rootConfig);
+        }
+
+        if (is_file($rootConfig = base_path($this->configFileName))) {
+            $configFile = realpath($rootConfig);
         }
 
         if (!is_null($optionConfig = $this->option('config'))) {
-            $configFile = $optionConfig;
+            $configFile      = Path::osStyle($optionConfig);
+            $useOptionConfig = true;
         }
 
-        $commandParams   = [];
-        $commandParams[] = '--config="' . realpath($configFile) . '"';
-        $commandParams[] = '--path-mode="' . $this->option('path-mode') . '"';
+        $commandParams = [
+            'config'    => '--config="' . $configFile . '"',
+            'path-mode' => '--path-mode="' . $this->option('path-mode') . '"',
+        ];
 
         if (!is_null($this->option('allow-risky'))) {
-            $commandParams[] = '--allow-risky="' . $this->option('allow-risky') . '"';
+            $commandParams['allow-risky'] = '--allow-risky="' . $this->option('allow-risky') . '"';
         }
 
         if ($this->option('dry-run')) {
-            $commandParams[] = '--dry-run';
+            $commandParams['dry-run'] = '--dry-run';
         }
 
         if (!is_null($this->option('rules'))) {
-            $commandParams[] = '--rules="' . $this->option('rules') . '"';
+            $commandParams['rules'] = '--rules="' . $this->option('rules') . '"';
         }
 
         if (!is_null($this->option('using-cache'))) {
-            $commandParams[] = '--using-cache="' . $this->option('using-cache') . '"';
+            $commandParams['using-cache'] = '--using-cache="' . $this->option('using-cache') . '"';
         }
 
         if (!is_null($this->option('cache-file'))) {
-            $commandParams[] = '--cache-file="' . $this->option('cache-file') . '"';
+            $commandParams['cache-file'] = '--cache-file="' . $this->option('cache-file') . '"';
         }
 
         if ($this->option('diff')) {
-            $commandParams[] = '--diff';
+            $commandParams['diff'] = '--diff';
         }
 
         if (!is_null($this->option('format'))) {
-            $commandParams[] = '--format="' . $this->option('format') . '"';
+            $commandParams['format'] = '--format="' . $this->option('format') . '"';
         }
 
         if ($this->option('stop-on-violation')) {
-            $commandParams[] = '--stop-on-violation';
+            $commandParams['stop-on-violation'] = '--stop-on-violation';
         }
 
         if (!is_null($this->option('show-progress'))) {
@@ -86,35 +108,48 @@ class ArtisanPhpCsFixerFix extends BaseCommand
         }
 
         if ($this->option('quiet')) {
-            $commandParams[] = '--quiet';
+            $commandParams['quiet'] = '--quiet';
         }
 
         if ($this->option('verbose')) {
-            $commandParams[] = '--verbose';
+            $commandParams['verbose'] = '--verbose';
         }
 
         if ($this->option('ansi')) {
-            $commandParams[] = '--ansi';
+            $commandParams['ansi'] = '--ansi';
         }
 
         if ($this->option('no-ansi')) {
-            $commandParams[] = '--no-ansi';
+            $commandParams['no-ansi'] = '--no-ansi';
         }
 
         if ($this->option('no-interaction')) {
-            $commandParams[] = '--no-interaction';
+            $commandParams['no-interaction'] = '--no-interaction';
         }
+
+        $pathParam = null;
 
         if (!empty($this->argument('path'))) {
-            $paths = [];
+            $paths = array_map(function ($path) {
+                return Path::absolute($path);
+            }, $this->argument('path'));
 
-            foreach ($this->argument('path') as $path) {
-                $paths[] = '"' . base_path($path) . '"';
+            if (1 == count($paths) && !$useOptionConfig) {
+                $targetFolder = is_dir($paths[0]) ? $paths[0] : dirname($paths[0]);
+
+                if (is_file($configFile = $targetFolder . DIRECTORY_SEPARATOR . $this->distConfigFileName)) {
+                    $commandParams['config'] = '--config="' . $configFile . '"';
+                }
+
+                if (is_file($configFile = $targetFolder . DIRECTORY_SEPARATOR . $this->configFileName)) {
+                    $commandParams['config'] = '--config="' . $configFile . '"';
+                }
             }
-            $commandParams[] = implode(' ', $paths);
+
+            $pathParam = ' "' . implode('" "', $paths) . '"';
         }
 
-        $paramString = (empty($commandParams)) ? '' : ' ' . implode(' ', $commandParams);
+        $paramString = (empty($commandParams) ? '' : ' ' . implode(' ', $commandParams)) . $pathParam;
 
         passthru($this->phpCsFixerBinary . ' fix' . $paramString);
     }
