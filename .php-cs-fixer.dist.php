@@ -17,7 +17,7 @@ $finder = Finder::create()
 $rules = [
     '@PhpCsFixer' => true,
     'binary_operator_spaces' => [
-        'default' => 'align_single_space_minimal',
+        // 'default' => 'align_single_space_minimal',
     ],
     'blank_line_before_statement' => [
         'statements' => [
@@ -61,6 +61,12 @@ $rules = [
     ],
     'phpdoc_no_empty_return' => false,
     'phpdoc_no_package' => false,
+    'visibility_required' => [
+        'elements' => [
+            'property',
+            'method',
+        ],
+    ],
 ];
 
 $config = new Config;
